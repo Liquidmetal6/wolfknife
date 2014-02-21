@@ -1,0 +1,59 @@
+SELECTION Sort
+1000
+Number of comparisons: 7.535170e+05
+Number of moves: 1.516541e+06
+I/O Time:  0.000000e+00
+Sorting time: 0.000000e+00
+
+10000
+Number of comparisons: 7.503763e+07
+Number of moves: 1.500698e+08
+I/O Time:  0.000000e+00
+Sorting time: 4.900000e-01
+
+100000
+Number of comparisons: 7.504931e+09
+Number of moves: 1.499506e+10
+I/O Time:  2.000000e-02
+Sorting time: 6.130000e+01
+
+
+INSERTION
+1000
+Number of comparisons: 4.995000e+04
+Number of moves: 5.469300e+04
+I/O Time:  0.000000e+00
+Sorting time: 0.000000e+00
+
+10000
+Number of comparisons: 8.429980e+05
+Number of moves: 9.132340e+05
+I/O Time:  0.000000e+00
+Sorting time: 1.000000e-02
+
+100000
+Number of comparisons: 1.267675e+07
+Number of moves: 1.364907e+07
+I/O Time:  3.000000e-02
+Sorting time: 3.000000e-02
+
+1000000
+Number of comparisons: 1.772498e+08
+Number of moves: 1.899581e+08
+I/O Time:  2.500000e-01
+Sorting time: 4.100000e-01
+
+The complexity to generate the sequences used in the sorting is roughly to the nth root, as the larger the array grows, the numbers that you use to obtain the gap grow exponentially faster, so it takes only very slightly more time. 
+
+For insertion, the sorting time does not appear to grow that fast, as the difference between 100,000 and 1,000,000 is only about twice the time. Even though the comparisons are much higher, the algorithm is efficient and it doesn't take that long. 
+The Selection sort is opposite though, as the larger the data set grows, it takes exponentially longer. The number of moves appears to more then double each time the data set doubles. 
+
+The additionl memory needed for these routines is simply O(N+1), as the variables do not change, only the size of the array as well as one extra spot to allow for swapping. 
+
+
+
+
+
+
+1000000
+
