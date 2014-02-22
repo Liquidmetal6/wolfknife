@@ -1,0 +1,32 @@
+#ifndef SORTINGHEADERS_H
+#define SORTINGHEADERS_H
+
+#include <stdio.h>
+#include<stdio.h>
+#include<stdlib.h>
+
+  //Create the structure for the nodes that store the data and the next data spot
+  //Value is the data that we need to sort with respect to
+  //Next is the handle to the next integer
+
+ typedef struct node{
+    long value;
+    struct node *next;
+  }Node;
+
+ //Create the structure for the linked list of linked lists, they point to linked lists made of nodes that store data
+  //node points to the node with the data
+  //next points to the next list
+
+ typedef struct list{
+    Node *Node;
+    struct list *next;
+  }List; 
+
+//Headers
+Node *Load_File(char *Filename);
+int Save_File(char *Filename, Node *List);
+Node *Shell_Sort(Node *list);
+Node *List_Create(int value, int index);
+#endif
+

@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+  //Create the structure for the nodes that store the data and the next data spot
+  //Value is the data that we need to sort with respect to
+  //Next is the handle to the next integer
+
+ typedef stuct_node{
+    long value;
+    struct_node *next;
+  }Node;
+
+ //Create the structure for the linked list of linked lists, they point to linked lists made of nodes that store data
+  //node points to the node with the data
+  //next points to the next list
+
+ typedef struct_list{
+    node *node;
+    struct_List *next;
+  }List; 
+
+//Headers
+Node *Load_File(char *Filename);
+int Save_File(char *Filename, Node *List);
+Node *Shell_Sort(Node *list);
+
+
+
+int main(argc, argv[])
+{
+
+ 
+
+ 
+
+
+
+  //Declarations/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  int saveprintcount = 0;
+  
+  //Validity Check//////////////////////////////////////////////////////////////////////////////////////////////////
+if(argc!=3)
+    {
+      printf('If you see this, then ensure file has parameters, ./proj2 input.txt output.txt');
+      return(0);
+    }
+  
+
+
+  //Function Calls//
+
+ Load_File(argv[1]);
+
+
+ 
+
+}
+
