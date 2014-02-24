@@ -4,11 +4,14 @@
 #include<time.h>
 
 ///////////////////////////////
-Node* List_Create(long int value,struct node* next)
+Node* List_Create(Node * ln)
 {
-  Node * ln = malloc(sizeof(Node));
-  ln->value = value;
-  ln->next = next;
+  if(ln==NULL)
+    { 
+   ln = malloc(sizeof(Node));
+      ln->value = 0;
+      ln->next = NULL;
+    }
   return ln;
 }
 
@@ -17,18 +20,25 @@ Node* Load_File(char *Filename)
 {
   //Open file
   FILE* fptr = fopen(Filename, "r");
+  Node* ln=NULL;
+  Node* temp=NULL;
+  int scancheck = 0;
+  long int x = 0;
 
-  //Validity Check, return 0 if unsuccesful
+//Validity Check, return 0 if unsuccesful
   if(fptr ==NULL)
     {printf("File didnt open!"); return 0;}
-    
-  //while not at the end of the file, scan into a function that returns a node
+  //HeadNode = List_Create(ln); 
+ln= List_Create(ln);
+// HeadNode->next= ln;
   while(!feof(fptr))
     {
-      int scanreturn = 0;
-      //Leaving off of here, how to fscanf into a linked list?  scanreturn = fscanf(fp,
+      temp = NULL;
+      scancheck = fscanf(fptr,"%li",&x);
+      if(scancheck ==0){printf("scanf failed"); return 0;}
+      ln->value = x;
+      ln->next = List_Create(temp);
     }
-
 
   return(0);
 }
