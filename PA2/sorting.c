@@ -16,10 +16,6 @@ Node* List_Create(Node * ln)
   return ln;
 }
 
-Node* List_Build(Node * ln,x,next)
-{
-
-}
 
 int Print_Node(Node * ln)
 {
@@ -32,6 +28,8 @@ int Print_Node(Node * ln)
 }
 
 /////////////////////////////////////////////////////////////////////////////
+
+
 Node* Load_File(char *Filename)
 {
   //Open file
@@ -61,12 +59,13 @@ ln= List_Create(ln);
       ln->value = x;
       temp = NULL;
       ln->next = List_Create(temp);
-    }
+      ln = ln->next;    
+ }
   int printthingy = 0;
   printthingy = Print_Node(HeadNode);
 
   return(0);
-}
+  }
 
 
 
