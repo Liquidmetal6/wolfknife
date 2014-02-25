@@ -21,7 +21,7 @@ int main(int argc,char **argv)
   //Function Calls//
   ln= Load_File(argv[1]);
   saveprintcount = Save_File(argv[2], ln);
-
+  printf("The number of integers successfully printed was %li\n", saveprintcount);
 
   /* int printthingy = 0;
      printthingy = Print_Node(ln);

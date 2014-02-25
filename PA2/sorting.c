@@ -9,7 +9,7 @@ Node* List_Create(Node * ln)
   if(ln==NULL)
     { 
    ln = malloc(sizeof(Node));
-      ln->value = 0;
+      ln->value = -1;
       ln->next = NULL;
       //printf("point 5\n");
     }
@@ -81,8 +81,12 @@ int Save_File(char *Filename, Node* list)
 
   while(temp!=NULL)
     {
-      saveprintcount++;
-      fprintf(fptr, "%li\n", temp->value);
+     
+      if(temp->value!=-1)
+	{     
+	  saveprintcount++;
+	  fprintf(fptr, "%li\n", temp->value);
+	}
       temp = temp->next;
     }
   return(saveprintcount);
