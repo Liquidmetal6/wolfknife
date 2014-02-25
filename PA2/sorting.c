@@ -68,16 +68,48 @@ ln= List_Create(ln);
   }
 
 
-
-
-
-
 ////////////////////////////////////////////////////////
 
 int Save_File(char *Filename, Node* list)
 {
-  printf("In save, check\n");
-  return 0;
+  long int saveprintcount = 0;
+  FILE* fptr=fopen(Filename,"w");
+
+  //check if opened
+  if(fptr==NULL){printf("File didnt open"); return(0);}
+  Node* temp = list->next;
+
+  while(temp!=NULL)
+    {
+      saveprintcount++;
+      fprintf(fptr, "%li\n", temp->value);
+      temp = temp->next;
+    }
+  return(saveprintcount);
+  /*
+ long int saveprintcount = 0;
+  FILE* fptr=fopen(Filename,"w");
+  long int *length;
+  Node* traverseNode = list;
+  int scanreturn = 0;
+  length= 0;
+
+  //Check validity of opened file
+  if(fptr==NULL){printf("File did not load"); return -1;}
+
+
+  printf("length is %li", *length);
+ 
+  while(traverseNode!=NULL)
+    { 
+     scanreturn = fscanf(fptr, "%li",&traverseNode->value);
+
+      if(scanreturn ==0){printf("File did not scan");return 0;}
+
+      traverseNode=traverseNode->next;
+    }
+  return (-1);
+  */
 }
 
 
