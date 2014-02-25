@@ -14,8 +14,15 @@ if(argc!=3)
     printf("Error, check usage. Must have ./proj2 input.txt output.txt");return(0);}
 //End Validity Check//
 
+ Node* ln;
+
   //Function Calls//
- Load_File(argv[1]);
+ln= Load_File(argv[1]);
+ int printthingy = 0;
+ printthingy = Print_Node(ln);
+
+
+
  //End Function Calls 
  return 0;
 }

@@ -61,10 +61,10 @@ ln= List_Create(ln);
       ln->next = List_Create(temp);
       ln = ln->next;    
  }
-  int printthingy = 0;
+  /* int printthingy = 0;
   printthingy = Print_Node(HeadNode);
-
-  return(0);
+  */
+  return(HeadNode);
   }
 
 
