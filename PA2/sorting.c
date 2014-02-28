@@ -40,7 +40,6 @@ Node* Load_File(char *Filename)
   // Node* ln=NULL;
   // Node* temp=NULL;
   Node* HeadNode=NULL;
-  int scancheck = 0;
   long int x = 0;
 
 //Validity Check, return 0 if unsuccesful
@@ -50,6 +49,7 @@ Node* Load_File(char *Filename)
 
   while(fscanf(fptr, "%li", &x)!=-1)
     {
+     
      HeadNode=  Tie_Nodes(HeadNode,x);
     }
   fclose(fptr);
@@ -67,7 +67,7 @@ int Save_File(char *Filename, Node* list)
 
   //check if opened
   if(fptr==NULL){printf("File didnt open"); return(0);}
-  Node* temp = list->next;
+  Node* temp = list;
 
   while(temp!=NULL)
     {
@@ -106,14 +106,12 @@ List* CreateLinkedList(Node* NodeHead, List* HeadList)
     {
       return NewList;
     }
+  //printf("HeadList is %li\n",HeadList->node->value);
+							      
   HeadList->next = NewList;
   NewList->prev = HeadList;
   return(NewList);
 }
-
-
-
-
 
 /////////////////////////////
 Node* Shell_Sort(Node *list)
@@ -133,7 +131,6 @@ Node* Shell_Sort(Node *list)
   int p=0;
   int gap = 0;
   int seqcount = 0; 
-  int i = 0;
   int TraverseGapCounter = 0;  
   //While k is less then size, k grows at a *3 rate and p increments
   while(k<Size)
@@ -155,6 +152,7 @@ Node* Shell_Sort(Node *list)
 	    if((TraverseGapCounter%gap) ==0)
 	      {
 		HeadList = CreateLinkedList(traverseNodes, HeadList);
+		printf("HeadList is %li\n",HeadList->node->value);
 	      }
 	    traverseNodes=traverseNodes->next;
 	    
@@ -162,17 +160,22 @@ Node* Shell_Sort(Node *list)
 	  }
 	//	for(i=1;i<gap; i++)
 	// {
-	    //this is how you advance the pointers
+	//this is how you advance the pointers
 	//  }
 
-      
-      gap = (gap/3)*2 ;//bring the gap down
-      seqcount = seqcount-1;
-      
+	List* templist = HeadList;
+	while(templist->next!=NULL)
+	  {
+	    printf("Headlist->Node->Value is %li\n",templist->node->value);
+	    templist = templist->next;      
+	  }
+	gap = (gap/3)*2 ;//bring the gap down
+	seqcount = seqcount-1;
+	
       }while(seqcount>=0);
-  k = k/3;
-  p=p-1;
-}
+      k = k/3;
+      p=p-1;
+    }
 
 
   return list;
