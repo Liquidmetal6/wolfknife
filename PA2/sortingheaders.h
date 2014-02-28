@@ -5,23 +5,24 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-  //Create the structure for the nodes that store the data and the next data spot
-  //Value is the data that we need to sort with respect to
-  //Next is the handle to the next integer
+//Create the structure for the nodes that store the data and the next data spot
+//Value is the data that we need to sort with respect to
+//Next is the handle to the next integer
 
- typedef struct node{
-    long value;
-    struct node *next;
-  }Node;
+typedef struct node{
+  long value;
+  struct node *next;
+}Node;
 
- //Create the structure for the linked list of linked lists, they point to linked lists made of nodes that store data
-  //node points to the node with the data
-  //next points to the next list
+//Create the structure for the linked list of linked lists, they point to linked lists made of nodes that store data
+//node points to the node with the data
+//next points to the next list
 
- typedef struct list{
-    Node *Node;
-    struct list *next;
-  }List; 
+typedef struct list{
+  Node *node;
+  struct list *next;
+  struct list *prev;
+}List; 
 
 //Headers
 Node *Load_File(char *Filename);
@@ -29,6 +30,8 @@ int Save_File(char *Filename, Node *List);
 Node *Shell_Sort(Node *list);
 Node *List_Create(long int x);
 int Print_Node(Node * ln);
-Node *Tie_Nodes(Node * ln, long int x);
+List* CreateLinkedList(Node* NodeHead, List* HeadList);
+
+//Node *Tie_Nodes(Node * ln, long int x);
 #endif
 

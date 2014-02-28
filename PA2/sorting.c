@@ -47,14 +47,12 @@ Node* Load_File(char *Filename)
   if(fptr ==NULL)
     {printf("File didnt open!"); return NULL;}
 
-  //scancheck = fscanf(fptr, "%li", &x);
-  //HeadNode = Tie_Nodes(HeadNode, 0);
 
   while(fscanf(fptr, "%li", &x)!=-1)
     {
      HeadNode=  Tie_Nodes(HeadNode,x);
-     
     }
+  fclose(fptr);
   return(HeadNode);
 }
 
@@ -81,6 +79,7 @@ int Save_File(char *Filename, Node* list)
 	  //	}
       temp = temp->next;
     }
+  fclose(fptr);
   return(saveprintcount);
 }
 
@@ -88,58 +87,94 @@ int Save_File(char *Filename, Node* list)
 
 
 ////////////////////////////////////////////////////////////////////////
-List * List_Create(Node * ln)
+List * ListofList_Create(Node * ln)
 {
+
   List * hold = malloc(sizeof(Node));
   hold->node = ln;
   hold->next = NULL;
-  hold->prev = NULL
+  hold->prev = NULL;
+  // printf("%li\n", hold->node->value);
     return(hold);
 }
 
-List_Tie(Node* hold,List* listhold)
+List* CreateLinkedList(Node* NodeHead, List* HeadList)
 {
-
-
+ 
+  List* NewList = ListofList_Create(NodeHead);
+  if(HeadList == NULL)
+    {
+      return NewList;
+    }
+  HeadList->next = NewList;
+  NewList->prev = HeadList;
+  return(NewList);
 }
+
+
 
 
 
 /////////////////////////////
 Node* Shell_Sort(Node *list)
 {
-
+  List* HeadList=NULL;
+  Node* GetSize = list;
+  int Size = 0;
+  while(GetSize!=NULL)
+    {
+      if (GetSize->next!=NULL)
+	{
+	  Size++;
+	}
+      GetSize = GetSize->next;
+    }
   int k=1;
   int p=0;
   int gap = 0;
-  int seqcount = 0;
-  int Size = 0;
-  // int j=0;
-  // int i = 0;
-  //  int temp = 0;
-  
+  int seqcount = 0; 
+  int i = 0;
+  int TraverseGapCounter = 0;  
   //While k is less then size, k grows at a *3 rate and p increments
   while(k<Size)
-   
-    { {
+    {
       k=k*3;
       p=p+1;
     }
   k=k/3;//Bring k and back from the overshoot
   p=p-1;
-  
-  while(p>=0)//Start of the while loop, it restarts up here
-   {
-     
-   }
-  gap = (gap/3)*2 ;//bring the gap down
-  seqcount = seqcount-1;
-}while(seqcount>=0);
-k = k/3;
-p=p-1;
+  while(p>=0)
+    {
+      gap = k;
+      seqcount = p;
+      do{  
+	Node * traverseNodes = list;
+	TraverseGapCounter=0;
+	while(traverseNodes->next!=NULL)
+	  {
+	    if((TraverseGapCounter%gap) ==0)
+	      {
+		HeadList = CreateLinkedList(traverseNodes, HeadList);
+	      }
+	    traverseNodes=traverseNodes->next;
+	    
+	    TraverseGapCounter++;
+	  }
+	//	for(i=1;i<gap; i++)
+	// {
+	    //this is how you advance the pointers
+	//  }
+
+      
+      gap = (gap/3)*2 ;//bring the gap down
+      seqcount = seqcount-1;
+      
+      }while(seqcount>=0);
+  k = k/3;
+  p=p-1;
+}
 
 
- 
-return 0;
+  return list;
 
 }

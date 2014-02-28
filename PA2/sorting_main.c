@@ -19,9 +19,9 @@ int main(int argc,char **argv)
   clock_t startload_t,endload_t;
   clock_t startsave_t, endsave_t;
   // clock_t startsort_t, endsort_t;
-
-    long double load_total;
-    long double save_total;
+  
+  long double load_total;
+  long double save_total;
   long double sort_total;
   long double IOtime ;
 
@@ -36,6 +36,11 @@ int main(int argc,char **argv)
   startsave_t = clock();
   saveprintcount = Save_File(argv[2], ln);
   endsave_t = clock();
+
+
+  Node * finalnode = Shell_Sort(ln);
+
+
 
   //Calcs load total
   load_total= (long double)(endload_t-startload_t)  / (long double)(CLOCKS_PER_SEC);  
