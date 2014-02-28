@@ -18,7 +18,7 @@ int main(int argc,char **argv)
   
   clock_t startload_t,endload_t;
   clock_t startsave_t, endsave_t;
-  clock_t startsort_t, endsort_t;
+  // clock_t startsort_t, endsort_t;
 
     long double load_total;
     long double save_total;

@@ -27,7 +27,8 @@
 Node *Load_File(char *Filename);
 int Save_File(char *Filename, Node *List);
 Node *Shell_Sort(Node *list);
-Node *List_Create(Node* ln);
+Node *List_Create(long int x);
 int Print_Node(Node * ln);
+Node *Tie_Nodes(Node * ln, long int x);
 #endif
 

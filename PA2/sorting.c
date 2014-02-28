@@ -4,16 +4,19 @@
 #include<time.h>
 
 ///////////////////////////////
-Node* List_Create(Node * ln)
+Node* Node_Create(long int x)
 {
-  if(ln==NULL)
-    { 
-   ln = malloc(sizeof(Node));
-      ln->value = -1;
-      ln->next = NULL;
-      //printf("point 5\n");
-    }
+  Node* ln = malloc(sizeof(Node));
+  ln->value = x;
+  ln->next = NULL;
   return ln;
+}
+
+Node* Tie_Nodes(Node* ln, long int x)
+{
+  Node* newnode = Node_Create(x);
+  newnode->next= ln;
+  return(newnode);
 }
 
 
@@ -34,38 +37,27 @@ Node* Load_File(char *Filename)
 {
   //Open file
   FILE* fptr = fopen(Filename, "r");
-  Node* ln=NULL;
-  Node* temp=NULL;
+  // Node* ln=NULL;
+  // Node* temp=NULL;
   Node* HeadNode=NULL;
   int scancheck = 0;
   long int x = 0;
-  printf("point 1");
 
 //Validity Check, return 0 if unsuccesful
   if(fptr ==NULL)
     {printf("File didnt open!"); return NULL;}
 
-//Create the first one. this value will be returned and not modified. Give it a distinctive value
-HeadNode = List_Create(ln);
-ln= List_Create(ln);
- HeadNode->next = ln;
- HeadNode->value = -1;
- 
- printf("point 2\n");
-  while(!feof(fptr))
+  //scancheck = fscanf(fptr, "%li", &x);
+  //HeadNode = Tie_Nodes(HeadNode, 0);
+
+  while(fscanf(fptr, "%li", &x)!=-1)
     {
-      scancheck = fscanf(fptr,"%li",&x);
-      if(scancheck ==0){printf("scanf failed"); return 0;}
-      ln->value = x;
-      temp = NULL;
-      ln->next = List_Create(temp);
-      ln = ln->next;    
- }
-  /* int printthingy = 0;
-  printthingy = Print_Node(HeadNode);
-  */
+     HeadNode=  Tie_Nodes(HeadNode,x);
+     
+    }
   return(HeadNode);
-  }
+}
+
 
 
 ////////////////////////////////////////////////////////
@@ -82,47 +74,72 @@ int Save_File(char *Filename, Node* list)
   while(temp!=NULL)
     {
      
-      if(temp->value!=-1)
-	{     
+      //  if(temp->value!=-1)
+      //	{     
 	  saveprintcount++;
 	  fprintf(fptr, "%li\n", temp->value);
-	}
+	  //	}
       temp = temp->next;
     }
   return(saveprintcount);
-  /*
- long int saveprintcount = 0;
-  FILE* fptr=fopen(Filename,"w");
-  long int *length;
-  Node* traverseNode = list;
-  int scanreturn = 0;
-  length= 0;
-
-  //Check validity of opened file
-  if(fptr==NULL){printf("File did not load"); return -1;}
-
-
-  printf("length is %li", *length);
- 
-  while(traverseNode!=NULL)
-    { 
-     scanreturn = fscanf(fptr, "%li",&traverseNode->value);
-
-      if(scanreturn ==0){printf("File did not scan");return 0;}
-
-      traverseNode=traverseNode->next;
-    }
-  return (-1);
-  */
 }
 
 
 
-////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////
+List * List_Create(Node * ln)
+{
+  List * hold = malloc(sizeof(Node));
+  hold->node = ln;
+  hold->next = NULL;
+  hold->prev = NULL
+    return(hold);
+}
+
+List_Tie(Node* hold,List* listhold)
+{
+
+
+}
+
+
+
+/////////////////////////////
 Node* Shell_Sort(Node *list)
 {
-  printf("In shell sort, check!\n");
-  return 0;
+
+  int k=1;
+  int p=0;
+  int gap = 0;
+  int seqcount = 0;
+  int Size = 0;
+  // int j=0;
+  // int i = 0;
+  //  int temp = 0;
+  
+  //While k is less then size, k grows at a *3 rate and p increments
+  while(k<Size)
+   
+    { {
+      k=k*3;
+      p=p+1;
+    }
+  k=k/3;//Bring k and back from the overshoot
+  p=p-1;
+  
+  while(p>=0)//Start of the while loop, it restarts up here
+   {
+     
+   }
+  gap = (gap/3)*2 ;//bring the gap down
+  seqcount = seqcount-1;
+}while(seqcount>=0);
+k = k/3;
+p=p-1;
+
+
+ 
+return 0;
 
 }
