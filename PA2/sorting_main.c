@@ -1,3 +1,5 @@
+
+
 #include"sortingheaders.h"
 #include <stdio.h>
 #include<stdlib.h>
@@ -18,7 +20,7 @@ int main(int argc,char **argv)
   
   clock_t startload_t,endload_t;
   clock_t startsave_t, endsave_t;
-  // clock_t startsort_t, endsort_t;
+  clock_t startsort_t, endsort_t;
   
   long double load_total;
   long double save_total;
@@ -33,14 +35,16 @@ int main(int argc,char **argv)
   endload_t = clock();
 
   //Save file targets savepprintcount with timing
+  
+
+  startsort_t = clock();
+  Node * finalnode = Shell_Sort(ln);
+  endsort_t= clock();
+
   startsave_t = clock();
-  saveprintcount = Save_File(argv[2], ln);
+  saveprintcount = Save_File(argv[2], finalnode);
   endsave_t = clock();
-
-
-   Node * finalnode = Shell_Sort(ln);
-
-
+  
 
   //Calcs load total
   load_total= (long double)(endload_t-startload_t)  / (long double)(CLOCKS_PER_SEC);  
@@ -48,12 +52,17 @@ int main(int argc,char **argv)
   //calcs save total
   save_total= (long double)(endsave_t - startsave_t) / (long double)(CLOCKS_PER_SEC);
 
+  sort_total = (long double)(endsort_t - startsort_t)/(long double)(CLOCKS_PER_SEC);
+
   //sum of load and save is total IO time
   IOtime= load_total+save_total;
 
   //print the IO time
   printf("I/O Time:    %Le\n",IOtime);
+  printf("Sorting Time:%Le\n", sort_total);
  //End Function Calls 
-  return 0;
+  memFree(finalnode);  
+return 0;
 }
+
 

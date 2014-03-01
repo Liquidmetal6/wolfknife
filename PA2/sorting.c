@@ -3,6 +3,11 @@
 #include<stdlib.h>
 #include<time.h>
 
+#include"sortingheaders.h"
+#include <stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
 ///////////////////////////////
 Node* Node_Create(long int x)
 {
@@ -24,7 +29,7 @@ int Print_Node(Node * ln)
 {
   if(ln->next!=NULL)
     {
-      printf("%li\n", ln->value);
+      //  printf("%li\n", ln->value);
     }
   Print_Node(ln->next);
   return(0);
@@ -57,6 +62,17 @@ Node* Load_File(char *Filename)
 }
 
 
+void memFree(Node* list)
+{
+  Node* temp =NULL;
+  while(list!=NULL)
+    {
+      temp = list->next;
+      list->next =NULL;
+      free(list);
+      list = temp;
+    }
+}
 
 ////////////////////////////////////////////////////////
 
@@ -71,12 +87,8 @@ int Save_File(char *Filename, Node* list)
 
   while(temp!=NULL)
     {
-     
-      //  if(temp->value!=-1)
-      //	{     
-	  saveprintcount++;
-	  fprintf(fptr, "%li\n", temp->value);
-	  //	}
+      saveprintcount++;
+      fprintf(fptr, "%li\n", temp->value);
       temp = temp->next;
     }
   fclose(fptr);
@@ -87,7 +99,7 @@ int Save_File(char *Filename, Node* list)
 
 
 ////////////////////////////////////////////////////////////////////////
-List * ListofList_Create(Node * ln)
+/*List * ListofList_Create(Node * ln)
 {
 
   List * hold = malloc(sizeof(Node));
@@ -107,18 +119,28 @@ List* CreateLinkedList(Node* NodeHead, List* HeadList)
       return NewList;
     }
   //printf("HeadList is %li\n",HeadList->node->value);
-							      
+
   HeadList->next = NewList;
   NewList->prev = HeadList;
   return(NewList);
+  }*/
+///////////
+
+Node* traverse(Node* ln,long value)
+{
+  int i=0;
+  for(i=0;i<value; i++)
+    {
+      ln=ln->next;
+    }
+  return ln;
 }
 
 /////////////////////////////
 Node* Shell_Sort(Node *list)
 {
-  List* HeadList=NULL;
+  int Size=0;  
   Node* GetSize = list;
-  int Size = 0;
   while(GetSize!=NULL)
     {
       if (GetSize->next!=NULL)
@@ -130,8 +152,11 @@ Node* Shell_Sort(Node *list)
   int k=1;
   int p=0;
   int gap = 0;
-  int seqcount = 0; 
-  int TraverseGapCounter = 0;  
+  int seqcount = 0;
+  int j=0;
+  int i = 0;
+  int temp = 0;
+  Node* copy = list;
   //While k is less then size, k grows at a *3 rate and p increments
   while(k<Size)
     {
@@ -140,44 +165,39 @@ Node* Shell_Sort(Node *list)
     }
   k=k/3;//Bring k and back from the overshoot
   p=p-1;
-  while(p>=0)
-    {
-      gap = k;
-      seqcount = p;
-      do{  
-	Node * traverseNodes = list;
-	TraverseGapCounter=0;
-	while(traverseNodes->next!=NULL)
-	  {
-	    if((TraverseGapCounter%gap) ==0)
-	      {
-		HeadList = CreateLinkedList(traverseNodes, HeadList);
-		printf("HeadList is %li\n",HeadList->node->value);
-	      }
-	    traverseNodes=traverseNodes->next;
-	    
-	    TraverseGapCounter++;
-	  }
-	//	for(i=1;i<gap; i++)
-	// {
-	//this is how you advance the pointers
-	//  }
 
-	List* templist = HeadList;
-	while(templist->next!=NULL)
+  while(p>=0)//Start of the while loop, it restarts up here
+    {
+      //Assign gap to k
+      gap=k;
+      //seqcount to p
+      seqcount = p;
+      do{
+	//this is the outerloop
+	for(j=gap;j<Size+1;j++)
 	  {
-	    printf("Headlist->Node->Value is %li\n",templist->node->value);
-	    templist = templist->next;      
+	    //the first value is the temp smallest
+	    temp=traverse(copy,j)->value;
+	    i=j;
+	       
+	    while(i>=gap && ((traverse(list, i-gap))->value)>temp)
+	      {//swap in here
+		traverse(copy, i)->value  = traverse(copy, i-gap)->value;
+		i=i-gap;
+	      }
+	    traverse(copy, i)->value = temp;
 	  }
 	gap = (gap/3)*2 ;//bring the gap down
 	seqcount = seqcount-1;
-	
       }while(seqcount>=0);
       k = k/3;
       p=p-1;
     }
-
-
   return list;
 
 }
+
+  
+
+  
+

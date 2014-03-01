@@ -30,7 +30,7 @@ int Save_File(char *Filename, Node *List);
 Node *Shell_Sort(Node *list);
 Node *List_Create(long int x);
 int Print_Node(Node * ln);
-List* CreateLinkedList(Node* NodeHead, List* HeadList);
+void memFree(Node* list);
 
 //Node *Tie_Nodes(Node * ln, long int x);
 #endif
